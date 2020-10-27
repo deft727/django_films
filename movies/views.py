@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
 from django.views.generic import ListView
 from .models import Movie
-
+from .forms import RewiewForm
 
 class MoviesView(ListView):
     model=Movie
@@ -14,3 +14,14 @@ class MoviesView(ListView):
 class MovieDetailView(DetailView):
     model=Movie
     slug_field="url"
+
+class AddReview(View):
+    def post(self,request,pk):
+        form=RewiewForm(request.POST)
+        movie=Movie.objects.get(id=pk)
+        if form.is_valid():
+            form=form.save(commit=False)
+            form.movie=movie
+            # print(pk,type(pk))
+            form.save()
+        return redirect(movie.absoluteUrl())
