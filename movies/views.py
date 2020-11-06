@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
 from django.views.generic import ListView
-from .models import Movie,Category
+from .models import Movie,Category,Actor
 from .forms import RewiewForm
 
 class MoviesView(ListView):
@@ -29,3 +29,9 @@ class AddReview(View):
             # print(form.name)
             form.save()
         return redirect(movie.absoluteUrl())
+
+
+class ActorView(DetailView):
+    model=Actor
+    template_name='movies/actor.html'
+    slug_field="name"

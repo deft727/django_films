@@ -28,7 +28,8 @@ class Actor(models.Model):
     class Meta:
         verbose_name='Актеры и режисеры'
         verbose_name_plural='Актеры и режисеры'
-    
+    def get_absolute_url(self):
+        return reverse('actor_detail',kwargs={"slug":self.name})
 
 class Ganre(models.Model):
     name=models.CharField('Имя',max_length=100)
