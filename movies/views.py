@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
 from django.views.generic import ListView
-from .models import Movie
+from .models import Movie,Category
 from .forms import RewiewForm
 
 class MoviesView(ListView):
@@ -14,6 +14,7 @@ class MoviesView(ListView):
 class MovieDetailView(DetailView):
     model=Movie
     slug_field="url"
+
 
 class AddReview(View):
     def post(self,request,pk):
