@@ -99,11 +99,12 @@ class MovieShots(models.Model):
 class RatingStar(models.Model):
     value=models.SmallIntegerField('Значение',default=0)
     def __str__(self):
-        return self.value
+        return str(self.value) #or f'{self.value} to string
     
     class Meta:
         verbose_name='звезда рейтинга'
         verbose_name_plural='звезды рейтинга'
+        ordering=["-value"]
 
 class Rating(models.Model):
     ip=models.CharField('IP адрес',max_length=15)
